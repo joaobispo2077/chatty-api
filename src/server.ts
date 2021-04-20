@@ -1,17 +1,15 @@
 import express from  'express';
 
+import {routes} from './routes';
+
 import './database';
 
 const app = express();
-
 const port = 3333;
 
-app.get('/', (req, res, next) => {
-  return res.json({ message: 'Hello chatty api!' });
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.post("/user", (req, res, next) => {
-  return res.json({ message: 'created user with success.' })
-});
+app.use(routes);
 
 app.listen(port, () => console.log(`server is running at port ${port}`));
