@@ -1,28 +1,11 @@
 import { Router } from 'express';
-import { getCustomRepository } from 'typeorm';
-import { SettingsRepositories } from './repositories/SettingsRepositories';
+import { SettingsController } from './controllers/SettingsController';
 
 const routes = Router();
 
-routes.post('/settings', async (req, res, next)=> {
-  try{
-    const { chat, username } = req.body;
-  
-    const settingsRepository = getCustomRepository(SettingsRepositories);
-  
-    const settings = settingsRepository.create({
-      chat,
-      username
-    });
-  
-    await settingsRepository.save(settings);
-  
-    return res.status(201).json(settings);
+const settingsController = new SettingsController();
 
-  }catch(err){
-    return res.status(500).json({ error: err.message});
-  }
-});
+routes.post('/settings', settingsController.create);
 
 routes.get('/', (req, res, next) => {
   return res.json({ message: 'Hello chatty api!' });
