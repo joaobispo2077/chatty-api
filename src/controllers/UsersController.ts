@@ -3,7 +3,7 @@ import { UsersService } from "../services/UsersService";
 
 
 class UsersController {
-  async create(req: Request, res: Response, next: NextFunction) {
+  async create(req: Request, res: Response, next: NextFunction): Promise<Response> {
     try{
       const { email } = req.body;
 
@@ -17,3 +17,6 @@ class UsersController {
     }
   }
  }
+
+
+ export { UsersController };

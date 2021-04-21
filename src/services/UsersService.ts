@@ -12,7 +12,7 @@ class UsersService {
     
     const user = usersRepository.create({email});
 
-    await usersRepository.save({email}); 
+    await usersRepository.save(user); 
 
     return user;
   }

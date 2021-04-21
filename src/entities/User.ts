@@ -1,8 +1,8 @@
 import { Entity, PrimaryColumn, Column, CreateDateColumn } from "typeorm";
 
-import {  v4 as uuid } from 'uuid';
+import { v4 as uuid } from 'uuid';
 
-@Entity("settings")
+@Entity("users")
 class User {
 
   @PrimaryColumn()

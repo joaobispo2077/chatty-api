@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { SettingsService } from "../services/SettingsService";
 
 class SettingsController {
-  async create(req: Request, res: Response, next: NextFunction) {
+  async create(req: Request, res: Response, next: NextFunction): Promise<Response>{
     try{
       const { chat, username } = req.body;
     
