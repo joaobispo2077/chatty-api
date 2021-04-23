@@ -4,6 +4,11 @@ import { ConnectionsService } from '../services/ConnectionsService';
 import { UsersService } from '../services/UsersService';
 import { MessagesService } from '../services/MessagesService';
 
+interface IParams {
+  text: string;
+  email: string;
+}
+
 io.on('connect',  (socket) => {
   const connectionSerivce = new ConnectionsService();
   const usersSerivce = new UsersService();
@@ -15,7 +20,7 @@ io.on('connect',  (socket) => {
     let user_id = null;
 
 
-    const { text, email } = params;
+    const { text, email } = params as IParams;
 
     const usersExists = await usersSerivce.findByEmail(email);
 
@@ -29,7 +34,7 @@ io.on('connect',  (socket) => {
       user_id = user.id;
     } else {
       user_id = usersExists.id;
-      
+
       const connection = await connectionSerivce.findByUserId(usersExists.id);
 
       if(!connection) {
