@@ -80,3 +80,22 @@ function sendMessage(id) {
 
   text.value = '';
 }
+
+socket.on('admin_receive_message', params => {
+  console.log('params:', params);
+
+  const { message, socket_id } = params;
+
+  const connection = connectionsUsers.find(connectionUser => connectionUser.socket_id === socket_id);
+
+  const divMessages = document.getElementById(`allMessages${connection.user_id}`);
+
+  const createDiv = document.createElement('div');
+  createDiv.className = 'admin_message_client';
+
+  createDiv.innerHTML = `<span>${connection.user.email}</span>`;
+  createDiv.innerHTML += `<span>${message.text}</span>`;
+  createDiv.innerHTML += `<span class="admin_date">${dayjs(message.created_at).format("DD/MM/YYYY HH:mm:ss")}</span>`;
+
+  divMessages.appendChild(createDiv);
+});
