@@ -20,6 +20,10 @@ app.get('/pages/chat/client', (req, res) => {
   res.render('html/client.html');
 });
 
+app.get('/pages/chat/admin', (req, res) => {
+  res.render('html/admin.html');
+});
+
 const http = createServer(app); // creating http protocol
 const io = new Server(http); // creating websocket protocol
 
